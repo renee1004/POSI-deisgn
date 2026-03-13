@@ -940,8 +940,12 @@
             });
 
             Object.values(colMap).forEach(rects => {
+                const table = tableWrap.querySelector('table');
+                const tableRect = table.getBoundingClientRect();
+
                 const top = Math.min(...rects.map(r => r.top)) - wrapRect.top;
-                const bottom = Math.max(...rects.map(r => r.bottom)) - wrapRect.top;
+                // 테이블의 실제 바닥까지 박스를 확장
+                const bottom = tableRect.bottom - wrapRect.top;
                 const left = Math.min(...rects.map(r => r.left)) - wrapRect.left + scrollLeft;
                 const width = Math.max(...rects.map(r => r.width));
 
